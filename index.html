@@ -5,17 +5,30 @@
   <title>Filippi Automotores</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
 </head>
-
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
 <body>
 
 <header>
   <h1>Filippi Automotores</h1>
 </header>
 
+<!-- BUSCADOR -->
+<input type="text" id="buscador" placeholder="Buscar auto..." onkeyup="filtrarAutos()" />
+
+<!-- AUTOS -->
 <section id="autos" class="autos">
-  <!-- Los autos se cargan automáticamente desde Google Sheets -->
 </section>
+
+<!-- BOTÓN WHATSAPP -->
+<a href="https://api.whatsapp.com/send?phone=543812082314&text=Hola!%20quiero%20consultar%20por%20un%20vehículo" 
+   class="whatsapp-float" target="_blank"> 💬
+</a>
 
 <script src="app.js"></script>
 

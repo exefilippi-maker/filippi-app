@@ -17,7 +17,7 @@ async function cargarAutos() {
     })
   );
 
-  // 🔥 ordenar por vistas (de mayor a menor)
+  // 🔥 ordenar por vistas (ranking automático)
   autosConVistas.sort((a, b) => b.vistas - a.vistas);
 
   mostrarAutos(autosConVistas);
@@ -38,11 +38,19 @@ function mostrarAutos(autos) {
         <p>${destacado}</p>
         <p>👀 ${auto.vistas} vistas</p>
 
-        <p>Año: ${auto.AÑO}</p>
-        <p>KMs: ${auto.KILOMETRAJE}</p>
+        <p>📅 Año: ${auto.AÑO}</p>
+        <p>🛣️ ${auto.KILOMETRAJE} km</p>
         <p class="precio">$${auto.PRECIO}</p>
 
-        <button onclick="verDetalle('${auto["MARCA-MODELO"]}', '${auto.AÑO}', '${auto.KILOMETRAJE}', '${auto.PRECIO}', '${auto.IMAGEN}')">
+        <button onclick="verDetalle(
+          '${auto["MARCA-MODELO"]}',
+          '${auto.AÑO}',
+          '${auto.KILOMETRAJE}',
+          '${auto.PRECIO}',
+          '${auto.IMAGEN}',
+          '${auto.FINANCIACION || "NO"}',
+          '${auto.PERMUTA || "NO"}'
+        )">
           Ver más
         </button>
       </div>
@@ -50,9 +58,31 @@ function mostrarAutos(autos) {
   });
 }
 
-function verDetalle(modelo, anio, km, precio, imagen) {
-  window.location.href = `detalle.html?modelo=${encodeURIComponent(modelo)}&anio=${anio}&km=${km}&precio=${precio}&imagen=${encodeURIComponent(imagen)}`;
+// 🔥 ir a detalle (100% robusto)
+function verDetalle(modelo, anio, km, precio, imagen, financiacion, permuta) {
+
+  const url = `detalle.html?modelo=${encodeURIComponent(modelo)}
+  &anio=${encodeURIComponent(anio)}
+  &km=${encodeURIComponent(km)}
+  &precio=${encodeURIComponent(precio)}
+  &imagen=${encodeURIComponent(imagen)}
+  &financiacion=${encodeURIComponent(financiacion)}
+  &permuta=${encodeURIComponent(permuta)}`;
+
+  // eliminar espacios que rompen la URL
+  window.location.href = url.replace(/\s/g, '');
 }
 
-// iniciar
+// 🔥 buscador en vivo
+function filtrarAutos() {
+  const input = document.getElementById("buscador").value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    const texto = card.innerText.toLowerCase();
+    card.style.display = texto.includes(input) ? "block" : "none";
+  });
+}
+
+// iniciar app
 cargarAutos();

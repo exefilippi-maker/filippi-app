@@ -1,31 +1,46 @@
 <script>
-
-// 1️⃣ Leer datos de la URL
 const params = new URLSearchParams(window.location.search);
 
-const modelo = params.get("modelo");
-const anio = params.get("anio");
-const km = params.get("km");
-const precio = params.get("precio");
-const imagen = params.get("imagen");
+// 🔥 obtener datos (con protección)
+const modelo = decodeURIComponent(params.get("modelo") || "");
+const anio = params.get("anio") || "";
+const km = params.get("km") || "";
+const precio = params.get("precio") || "";
+const imagen = decodeURIComponent(params.get("imagen") || "");
+const financiacion = params.get("financiacion") || "";
+const permuta = params.get("permuta") || "";
 
-// 2️⃣ SUMAR VISTA (AHORA SÍ)
-fetch(`https://api.countapi.xyz/hit/filippi/${encodeURIComponent(modelo)}`);
+// 🔥 contar vista (AHORA SÍ después de definir modelo)
+if (modelo) {
+  fetch(`https://api.countapi.xyz/hit/filippi/${modelo}`);
+}
 
+// 🔥 separar imágenes (seguro)
+const imagenes = imagen ? imagen.split(",") : [];
 
-// 3️⃣ Separar imágenes
-const imagenes = imagen.split(",");
-
-// 4️⃣ Crear carrusel
+// 🔥 crear carrusel
 let galeria = `<div class="carousel">`;
 
 imagenes.forEach(img => {
-  galeria += `<img src="${img.trim()}">`;
+  if (img.trim() !== "") {
+    galeria += `<img src="${img.trim()}">`;
+  }
 });
 
 galeria += `</div>`;
 
-// 5️⃣ Mostrar contenido
+// 🔥 lógica negocio (dinámico)
+let extras = "";
+
+if (financiacion === "SI") {
+  extras += `<p>💳 Financiación disponible</p>`;
+}
+
+if (permuta === "SI") {
+  extras += `<p>🔁 Recibimos permutas</p>`;
+}
+
+// 🔥 render
 const contenedor = document.getElementById("detalle");
 
 contenedor.innerHTML = `
@@ -38,8 +53,7 @@ contenedor.innerHTML = `
     <p>🛣️ ${km} km</p>
     <p class="precio">$${precio}</p>
 
-    <p>💳 Financiación disponible</p>
-    <p>🔁 Recibimos permutas</p>
+    ${extras}
 
     <button onclick="consultar('${modelo}')">
       Consultar por WhatsApp
@@ -48,14 +62,13 @@ contenedor.innerHTML = `
   </div>
 `;
 
-// 6️⃣ WhatsApp + tracking de clicks
+// 🔥 WhatsApp sin romper navegación
 function consultar(modelo) {
-  fetch(`https://api.countapi.xyz/hit/filippi-click/${encodeURIComponent(modelo)}`);
+  fetch(`https://api.countapi.xyz/hit/filippi-click/${modelo}`);
 
   const mensaje = `Hola, consulto por el ${modelo}`;
-  const url = `https://api.whatsapp.com/send?phone=543812082314&text=${encodeURIComponent(mensaje)}`;
+  const url = `https://wa.me/543812082314?text=${encodeURIComponent(mensaje)}`;
 
-  window.location.href = url;
+  window.open(url, "_blank"); // 👈 abre en nueva pestaña
 }
-
 </script>

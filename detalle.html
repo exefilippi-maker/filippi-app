@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Detalle del vehículo</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header>
-  <h1>Detalle del vehículo</h1>
-</header>
-
-<div id="detalle"></div>
-
 <script>
+
+// 1️⃣ Leer datos de la URL
 const params = new URLSearchParams(window.location.search);
 
 const modelo = params.get("modelo");
@@ -23,10 +9,14 @@ const km = params.get("km");
 const precio = params.get("precio");
 const imagen = params.get("imagen");
 
-// SEPARAR IMÁGENES
+// 2️⃣ SUMAR VISTA (AHORA SÍ)
+fetch(`https://api.countapi.xyz/hit/filippi/${encodeURIComponent(modelo)}`);
+
+
+// 3️⃣ Separar imágenes
 const imagenes = imagen.split(",");
 
-// CREAR CARRUSEL
+// 4️⃣ Crear carrusel
 let galeria = `<div class="carousel">`;
 
 imagenes.forEach(img => {
@@ -35,6 +25,7 @@ imagenes.forEach(img => {
 
 galeria += `</div>`;
 
+// 5️⃣ Mostrar contenido
 const contenedor = document.getElementById("detalle");
 
 contenedor.innerHTML = `
@@ -57,12 +48,14 @@ contenedor.innerHTML = `
   </div>
 `;
 
+// 6️⃣ WhatsApp + tracking de clicks
 function consultar(modelo) {
+  fetch(`https://api.countapi.xyz/hit/filippi-click/${encodeURIComponent(modelo)}`);
+
   const mensaje = `Hola, consulto por el ${modelo}`;
   const url = `https://api.whatsapp.com/send?phone=543812082314&text=${encodeURIComponent(mensaje)}`;
-  window.open(url, "_blank");
-}
-</script>
 
-</body>
-</html>
+  window.location.href = url;
+}
+
+</script>

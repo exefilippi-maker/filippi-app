@@ -42,15 +42,7 @@ function mostrarAutos(autos) {
         <p>🛣️ ${auto.KILOMETRAJE} km</p>
         <p class="precio">$${auto.PRECIO}</p>
 
-        <button onclick="verDetalle(
-          '${auto["MARCA-MODELO"]}',
-          '${auto.AÑO}',
-          '${auto.KILOMETRAJE}',
-          '${auto.PRECIO}',
-          '${auto.IMAGEN}',
-          '${auto.FINANCIACION || "NO"}',
-          '${auto.PERMUTA || "NO"}'
-        )">
+        <button onclick="verDetalle('${auto["MARCA-MODELO"]}')">
           Ver más
         </button>
       </div>
@@ -59,20 +51,9 @@ function mostrarAutos(autos) {
 }
 
 // 🔥 ir a detalle (100% robusto)
-function verDetalle(modelo, anio, km, precio, imagen, financiacion, permuta) {
-
-  const url = `detalle.html?modelo=${encodeURIComponent(modelo)}
-  &anio=${encodeURIComponent(anio)}
-  &km=${encodeURIComponent(km)}
-  &precio=${encodeURIComponent(precio)}
-  &imagen=${encodeURIComponent(imagen)}
-  &financiacion=${encodeURIComponent(financiacion)}
-  &permuta=${encodeURIComponent(permuta)}`;
-
-  // eliminar espacios que rompen la URL
-  window.location.href = url.replace(/\s/g, '');
+function verDetalle(modelo) {
+  window.location.href = `detalle.html?modelo=${encodeURIComponent(modelo)}`;
 }
-
 // 🔥 buscador en vivo
 function filtrarAutos() {
   const input = document.getElementById("buscador").value.toLowerCase();

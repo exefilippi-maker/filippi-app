@@ -75,3 +75,25 @@ button:hover {
 .whatsapp-float:hover {
   background: #1ebe5d;
 }
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel img {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* ocultar scroll feo */
+.carousel::-webkit-scrollbar {
+  display: none;
+}

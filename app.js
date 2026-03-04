@@ -15,7 +15,7 @@ function mostrarAutos(lista) {
 
   lista.forEach(auto => {
     contenedor.innerHTML += `
-      <div class="card">
+      <div class="card" onclick="verDetalle('${auto["MARCA-MODELO"]}', '${auto.AÑO}', '${auto.KILOMETRAJE}', '${auto.PRECIO}', '${auto.IMAGEN}')">
         <img src="${auto.IMAGEN}" alt="Auto" style="width:100%; height:200px; object-fit:cover;">
         <h2>${auto["MARCA-MODELO"]}</h2>
         <p>Año: ${auto.AÑO}</p>
@@ -41,4 +41,8 @@ function consultar(modelo) {
   const mensaje = `Hola, consulto por el ${modelo}`;
   const url = `https://api.whatsapp.com/send?phone=543812082314&text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
+}
+function verDetalle(modelo, anio, km, precio, imagen) {
+  const url = `detalle.html?modelo=${encodeURIComponent(modelo)}&anio=${anio}&km=${km}&precio=${precio}&imagen=${encodeURIComponent(imagen)}`;
+  window.location.href = url;
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle del vehículo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Detalle del vehículo</h1>
+</header>
+
+<div id="detalle"></div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const modelo = params.get("modelo");
+const anio = params.get("anio");
+const km = params.get("km");
+const precio = params.get("precio");
+const imagen = params.get("imagen");
+
+// SEPARAR IMÁGENES
+const imagenes = imagen.split(",");
+
+// CREAR CARRUSEL
+let galeria = `<div class="carousel">`;
+
+imagenes.forEach(img => {
+  galeria += `<img src="${img.trim()}">`;
+});
+
+galeria += `</div>`;
+
+const contenedor = document.getElementById("detalle");
+
+contenedor.innerHTML = `
+  <div class="card">
+
+    ${galeria}
+
+    <h2>${modelo}</h2>
+    <p>📅 Año: ${anio}</p>
+    <p>🛣️ ${km} km</p>
+    <p class="precio">$${precio}</p>
+
+    <p>💳 Financiación disponible</p>
+    <p>🔁 Recibimos permutas</p>
+
+    <button onclick="consultar('${modelo}')">
+      Consultar por WhatsApp
+    </button>
+
+  </div>
+`;
+
+function consultar(modelo) {
+  const mensaje = `Hola, consulto por el ${modelo}`;
+  const url = `https://api.whatsapp.com/send?phone=543812082314&text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>

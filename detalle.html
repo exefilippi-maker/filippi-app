@@ -1,74 +1,138 @@
-<script>
-const params = new URLSearchParams(window.location.search);
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle del Vehículo</title>
 
-// 🔥 obtener datos (con protección)
-const modelo = decodeURIComponent(params.get("modelo") || "");
-const anio = params.get("anio") || "";
-const km = params.get("km") || "";
-const precio = params.get("precio") || "";
-const imagen = decodeURIComponent(params.get("imagen") || "");
-const financiacion = params.get("financiacion") || "";
-const permuta = params.get("permuta") || "";
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a1a2f, #0f2f55);
+      color: white;
+    }
 
-// 🔥 contar vista (AHORA SÍ después de definir modelo)
-if (modelo) {
-  fetch(`https://api.countapi.xyz/hit/filippi/${modelo}`);
-}
+    .container {
+      padding: 20px;
+    }
 
-// 🔥 separar imágenes (seguro)
-const imagenes = imagen ? imagen.split(",") : [];
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
 
-// 🔥 crear carrusel
-let galeria = `<div class="carousel">`;
+    h1 {
+      margin: 10px 0;
+      font-size: 24px;
+    }
 
-imagenes.forEach(img => {
-  if (img.trim() !== "") {
-    galeria += `<img src="${img.trim()}">`;
-  }
-});
+    .info p {
+      margin: 6px 0;
+      color: #cfd8e3;
+      font-size: 16px;
+    }
 
-galeria += `</div>`;
+    .precio {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #ffffff;
+    }
 
-// 🔥 lógica negocio (dinámico)
-let extras = "";
+    .badge {
+      display: inline-block;
+      background: #1e88e5;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin: 5px 5px 5px 0;
+      font-size: 14px;
+    }
 
-if (financiacion === "SI") {
-  extras += `<p>💳 Financiación disponible</p>`;
-}
+    .whatsapp {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      background: #25D366;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 18px;
+    }
 
-if (permuta === "SI") {
-  extras += `<p>🔁 Recibimos permutas</p>`;
-}
+    .volver {
+      display: block;
+      margin-top: 15px;
+      text-align: center;
+      color: #ccc;
+      text-decoration: none;
+    }
 
-// 🔥 render
-const contenedor = document.getElementById("detalle");
+  </style>
+</head>
 
-contenedor.innerHTML = `
-  <div class="card">
+<body>
 
-    ${galeria}
+  <div class="container">
 
-    <h2>${modelo}</h2>
-    <p>📅 Año: ${anio}</p>
-    <p>🛣️ ${km} km</p>
-    <p class="precio">$${precio}</p>
+    <img id="imagen">
 
-    ${extras}
+    <h1 id="modelo"></h1>
 
-    <button onclick="consultar('${modelo}')">
+    <div class="info">
+      <p id="anio"></p>
+      <p id="km"></p>
+      <p class="precio" id="precio"></p>
+    </div>
+
+    <div id="badges"></div>
+
+    <a id="whatsapp" class="whatsapp" target="_blank">
       Consultar por WhatsApp
-    </button>
+    </a>
+
+    <a href="index.html" class="volver">⬅ Volver</a>
 
   </div>
-`;
 
-// 🔥 WhatsApp sin romper navegación
-function consultar(modelo) {
-  fetch(`https://api.countapi.xyz/hit/filippi-click/${modelo}`);
+  <script>
+    const params = new URLSearchParams(window.location.search);
 
-  const mensaje = `Hola, consulto por el ${modelo}`;
-  const url = `https://wa.me/543812082314?text=${encodeURIComponent(mensaje)}`;
+    const modelo = params.get("modelo");
+    const anio = params.get("anio");
+    const km = params.get("km");
+    const precio = params.get("precio");
+    const imagen = params.get("imagen");
+    const financiacion = params.get("financiacion");
+    const permuta = params.get("permuta");
 
-  window.open(url, "_blank"); // 👈 abre en nueva pestaña
-}
-</script>
+    // pintar datos
+    document.getElementById("modelo").innerText = modelo;
+    document.getElementById("anio").innerText = "📅 Año: " + anio;
+    document.getElementById("km").innerText = "🛣️ Km: " + km;
+    document.getElementById("precio").innerText = precio;
+    document.getElementById("imagen").src = imagen;
+
+    // badges dinámicos
+    const badges = document.getElementById("badges");
+
+    if (financiacion === "SI") {
+      badges.innerHTML += `<span class="badge">💳 Financiación disponible</span>`;
+    }
+
+    if (permuta === "SI") {
+      badges.innerHTML += `<span class="badge">🔁 Recibe permuta</span>`;
+    }
+
+    // link whatsapp automático
+    const mensaje = `Hola, te consulto por el ${modelo} ${anio} con ${km} km. ¿Sigue disponible?`;
+    const telefono = "549381XXXXXXX"; // 🔥 CAMBIAR POR TU NÚMERO
+
+    document.getElementById("whatsapp").href =
+      `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+  </script>
+
+</body>
+</html>

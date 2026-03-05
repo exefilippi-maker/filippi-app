@@ -161,3 +161,54 @@ header {
   max-width:350px;
   width:90%;
 }
+.header{
+  text-align:center;
+  padding:25px 10px;
+  background: linear-gradient(135deg,#0a1a2f,#0f2f55);
+}
+
+.logo{
+  width:320px;
+  max-width:90%;
+  margin-bottom:15px;
+}
+
+.buscador-container{
+  margin-bottom:15px;
+}
+
+#buscador{
+  padding:12px;
+  width:280px;
+  max-width:90%;
+  border-radius:10px;
+  border:none;
+  font-size:16px;
+}
+
+.info-header{
+  margin-top:10px;
+}
+
+#contadorAutos{
+  margin-right:15px;
+  font-weight:bold;
+}
+
+.btn-whatsapp{
+  background:#25D366;
+  color:white;
+  padding:10px 15px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+}
+.header{
+  background:#000;
+  padding:15px;
+  text-align:center;
+}
+
+.logo{
+  height:70px;
+}

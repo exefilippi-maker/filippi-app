@@ -29,7 +29,8 @@ async function cargarAutos() {
 function mostrarAutos(autos) {
   const contenedor = document.getElementById("autos");
   contenedor.innerHTML = "";
-
+document.getElementById("contadorAutos").innerText =
+"🚗 " + autos.length + " autos disponibles";
   autos.forEach((auto, index) => {
     const destacado = index < 3 ? "🔥 DESTACADO" : "";
 

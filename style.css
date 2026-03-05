@@ -148,3 +148,16 @@ header {
 .carousel::-webkit-scrollbar {
   display: none;
 }
+.header{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px 10px;
+  background: linear-gradient(135deg,#0a1a2f,#0f2f55);
+}
+
+.logo{
+  max-width:350px;
+  width:90%;
+}

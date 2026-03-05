@@ -1,9 +1,12 @@
+/* RESET GENERAL */
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
   margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0a1a2f, #0f2f55);
+  color: white;
 }
 
+/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -11,6 +14,7 @@ header {
   padding: 15px;
 }
 
+/* GRID DE AUTOS */
 .autos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -18,11 +22,18 @@ header {
   padding: 20px;
 }
 
+/* TARJETA */
 .card {
-  background: white;
-  border-radius: 12px;
+  background: linear-gradient(145deg, #0f2f55, #0a1a2f);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   transition: 0.3s;
 }
 
@@ -30,34 +41,72 @@ header {
   transform: translateY(-5px);
 }
 
+/* DECORACIÓN (NO BLOQUEA CLICK) */
+.card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2));
+  border-radius: 50% 50% 0 0;
+
+  pointer-events: none; /* 🔥 FIX DEL BUG */
+}
+
+/* IMAGEN */
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* TITULO */
 .card h2 {
-  font-size: 18px;
-  margin: 10px;
+  margin: 10px 0 5px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  min-height: 50px;
 }
 
+/* TEXTO */
 .card p {
-  margin: 5px 10px;
+  margin: 4px 0;
+  color: #cfd8e3;
 }
 
-.precio {
+/* PRECIO */
+.card .precio {
   font-size: 20px;
   font-weight: bold;
-  color: #0a7cff;
+  color: #00c2ff;
 }
 
-button {
-  margin: 10px;
-  padding: 10px;
+/* BOTÓN */
+.card button {
+  margin-top: auto;
+  padding: 12px;
+  border-radius: 10px;
   border: none;
-  background: #0a7cff;
-  color: white;
-  border-radius: 8px;
   cursor: pointer;
+
+  background: linear-gradient(90deg, #00c2ff, #0072ff);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+
+  position: relative;
+  z-index: 2; /* 🔥 asegura clic correcto */
+  width: 100%;
 }
 
-button:hover {
-  background: #005fcc;
+.card button:hover {
+  opacity: 0.9;
 }
+
+/* WHATSAPP FLOTANTE */
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
@@ -75,6 +124,8 @@ button:hover {
 .whatsapp-float:hover {
   background: #1ebe5d;
 }
+
+/* CARRUSEL */
 .carousel {
   display: flex;
   overflow-x: auto;
@@ -93,103 +144,7 @@ button:hover {
   flex-shrink: 0;
 }
 
-/* ocultar scroll feo */
+/* OCULTAR SCROLL */
 .carousel::-webkit-scrollbar {
   display: none;
-}body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0a1a2f, #0f2f55);
-  color: white;
-}
-
-/* Tarjetas de autos */
-.card {
-  background: linear-gradient(145deg, #0f2f55, #0a1a2f);
-  border-radius: 15px;
-  padding: 15px;
-  margin: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  overflow: hidden;
-  position: relative;
-}
-
-/* Línea curva decorativa */
-.card::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2));
-  border-radius: 50% 50% 0 0;
-}
-
-/* Imagen */
-.card img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-/* Título */
-.card h2 {
-  margin: 10px 0 5px;
-  font-size: 20px;
-  letter-spacing: 1px;
-}
-
-/* Info */
-.card p {
-  margin: 3px 0;
-  color: #cfd8e3;
-}
-
-/* Botón */
-.button {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 15px;
-  background: white;
-  color: #0f2f55;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-}.card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 15px;
-}
-
-.card img {
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.card h2 {
-  min-height: 50px; /* evita saltos por nombres largos */
-}
-
-.card p {
-  margin: 5px 0;
-}
-
-.card .precio {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.card button {
-  margin-top: auto;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #00c2ff;
-  color: white;
-  cursor: pointer;
-}button {
-  min-height: 45px;
-  font-size: 16px;
 }

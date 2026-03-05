@@ -155,4 +155,41 @@ button:hover {
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
+}.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card h2 {
+  min-height: 50px; /* evita saltos por nombres largos */
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+.card .precio {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card button {
+  margin-top: auto;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #00c2ff;
+  color: white;
+  cursor: pointer;
+}button {
+  min-height: 45px;
+  font-size: 16px;
 }

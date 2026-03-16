@@ -1,34 +1,47 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Filippi Automotores</title>
+<meta charset="UTF-8">
+<title>Filippi Automotores</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
 </head>
 
 <body>
 
-<header>
-  <h1>Filippi Automotores</h1>
-</header>
+<header class="header">
 
-<input type="text" id="buscador" placeholder="Buscar auto..." onkeyup="filtrarAutos()" />
+<div class="logo-container">
+<img src="img/logo-filippi.png" alt="Filippi Automotores" class="logo">
+<span class="titulo">Filippi Automotores</span>
+</div>
+
+<div class="acciones">
+
+<input type="text" id="buscador" placeholder="🔎 Buscar auto..." onkeyup="filtrarAutos()" />
+
+<a href="#" class="btn-filo">🤖 Filo IA</a>
+
+<a href="https://api.whatsapp.com/send?phone=543812082314&text=Hola!%20quiero%20consultar%20por%20un%20vehículo"
+class="btn-wsp" target="_blank">WhatsApp</a>
+
+</div>
+
+</header>
 
 <section id="autos" class="autos"></section>
 
-<a href="https://api.whatsapp.com/send?phone=543812082314&text=Hola!%20quiero%20consultar%20por%20un%20vehículo" 
-   class="whatsapp-float" target="_blank"> 💬
+<a href="https://api.whatsapp.com/send?phone=543812082314&text=Hola!%20quiero%20consultar%20por%20un%20vehículo"
+class="whatsapp-float" target="_blank"> 💬
 </a>
 
 <script src="app.js"></script>
 
-<!-- ✅ SERVICE WORKER BIEN PUESTO -->
 <script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
+navigator.serviceWorker.register("service-worker.js");
 }
 </script>
 

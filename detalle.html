@@ -16,12 +16,6 @@
       padding: 20px;
     }
 
-    img {
-      width: 100%;
-      border-radius: 15px;
-      margin-bottom: 15px;
-    }
-
     h1 {
       margin: 10px 0;
       font-size: 24px;
@@ -70,6 +64,36 @@
       text-decoration: none;
     }
 
+    /* 🔥 GALERÍA PRO */
+    .galeria {
+      text-align: center;
+    }
+
+    .imagen-principal {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+
+    .miniaturas {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .miniaturas img {
+      width: 70px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .miniaturas img:hover {
+      transform: scale(1.1);
+    }
+
   </style>
 </head>
 
@@ -77,7 +101,11 @@
 
   <div class="container">
 
-    <img id="imagen">
+    <!-- 🔥 GALERÍA -->
+    <div class="galeria">
+      <img id="imagen-principal" class="imagen-principal">
+      <div class="miniaturas" id="miniaturas"></div>
+    </div>
 
     <h1 id="modelo"></h1>
 
@@ -90,7 +118,7 @@
     <div id="badges"></div>
 
     <a id="whatsapp" class="whatsapp" target="_blank">
-      Consultar por WhatsApp
+      📲 Consultar por WhatsApp
     </a>
 
     <a href="index.html" class="volver">⬅ Volver</a>
@@ -108,14 +136,40 @@
     const financiacion = params.get("financiacion");
     const permuta = params.get("permuta");
 
-    // pintar datos
+    // 🔥 GALERÍA
+    const imagenPrincipal = document.getElementById("imagen-principal");
+    const contenedorMiniaturas = document.getElementById("miniaturas");
+
+    let imagenes = [];
+
+    const imagenesParam = params.get("imagenes");
+
+    if (imagenesParam) {
+      imagenes = imagenesParam.split(",");
+    } else {
+      imagenes = [imagen]; // fallback
+    }
+
+    imagenPrincipal.src = imagenes[0];
+
+    imagenes.forEach(img => {
+      const mini = document.createElement("img");
+      mini.src = img;
+
+      mini.onclick = () => {
+        imagenPrincipal.src = img;
+      };
+
+      contenedorMiniaturas.appendChild(mini);
+    });
+
+    // datos
     document.getElementById("modelo").innerText = modelo;
     document.getElementById("anio").innerText = "📅 Año: " + anio;
     document.getElementById("km").innerText = "🛣️ Km: " + km;
     document.getElementById("precio").innerText = precio;
-    document.getElementById("imagen").src = imagen;
 
-    // badges dinámicos
+    // badges
     const badges = document.getElementById("badges");
 
     if (financiacion === "SI") {
@@ -126,9 +180,9 @@
       badges.innerHTML += `<span class="badge">🔁 Recibe permuta</span>`;
     }
 
-    // link whatsapp automático
+    // WhatsApp
     const mensaje = `Hola, te consulto por el ${modelo} ${anio} con ${km} km. ¿Sigue disponible?`;
-    const telefono = "5493812082314"; // 🔥 CAMBIAR POR TU NÚMERO
+    const telefono = "5493812082314";
 
     document.getElementById("whatsapp").href =
       `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;

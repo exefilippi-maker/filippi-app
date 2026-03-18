@@ -22,6 +22,7 @@ function mostrarAutos(autos){
     const km = auto["KILOMETRAJE"] || "";
     const precio = auto["PRECIO"] || "";
     const imagen = auto["IMAGEN"] || "";
+    const imagenes = auto["IMAGENES"] || ""; // 🔥 NUEVO
     const financiacion = auto["FINANCIACION"] || "NO";
     const permuta = auto["PERMUTA"] || "NO";
 
@@ -36,7 +37,7 @@ function mostrarAutos(autos){
         <p>🛣️ ${km} km</p>
         <p class="precio">$${precio}</p>
 
-        <button onclick="verDetalle('${modelo}','${anio}','${km}','${precio}','${imagen}','${financiacion}','${permuta}')">
+        <button onclick="verDetalle('${modelo}','${anio}','${km}','${precio}','${imagen}','${imagenes}','${financiacion}','${permuta}')">
         Ver más
         </button>
 
@@ -47,9 +48,17 @@ function mostrarAutos(autos){
 
 }
 
-function verDetalle(modelo,anio,km,precio,imagen,financiacion,permuta){
+function verDetalle(modelo,anio,km,precio,imagen,imagenes,financiacion,permuta){
 
-  const url = `detalle.html?modelo=${encodeURIComponent(modelo)}&anio=${encodeURIComponent(anio)}&km=${encodeURIComponent(km)}&precio=${encodeURIComponent(precio)}&imagen=${encodeURIComponent(imagen)}&financiacion=${encodeURIComponent(financiacion)}&permuta=${encodeURIComponent(permuta)}`;
+  const url = `detalle.html?
+  modelo=${encodeURIComponent(modelo)}
+  &anio=${encodeURIComponent(anio)}
+  &km=${encodeURIComponent(km)}
+  &precio=${encodeURIComponent(precio)}
+  &imagen=${encodeURIComponent(imagen)}
+  &imagenes=${encodeURIComponent(imagenes)}  // 🔥 CLAVE
+  &financiacion=${encodeURIComponent(financiacion)}
+  &permuta=${encodeURIComponent(permuta)}`;
 
   window.location.href = url;
 

@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Filippi Automotores</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Buscá y consultá autos en Filippi Automotores, Tucumán.">
+  <meta property="og:title" content="Filippi Automotores">
+  <meta property="og:description" content="Encontrá tu próximo auto. Financiación y permuta disponible.">
+  <meta property="og:image" content="https://exefilippi-maker.github.io/filippi-app/img/logo-filippi.png">
+  <meta property="og:type" content="website">
+  <title>Filippi Automotores</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
 </head>
 
 <body>
 
-<header class="header">
+  <header class="header">
+    <div class="logo-container">
+      <img src="img/logo-filippi.png" alt="Filippi Automotores" class="logo">
+      <span class="titulo">Filippi Automotores</span>
+    </div>
+    <div class="acciones">
+      <input
+        type="text"
+        id="buscador"
+        placeholder="🔎 Buscar auto..."
+        onkeyup="filtrarAutos()"
+        autocomplete="off"
+      />
+      <a href="#" class="btn-filo">🤖 Filo IA</a>
+      <a href="https://api.whatsapp.com/send?phone=543812082314&text=Hola!%20quiero%20consultar%20por%20un%20vehículo"
+        class="btn-wsp" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </header>
 
-<div class="logo-container">
-<img src="img/logo-filippi.png" alt="Filippi Automotores" class="logo">
-<span class="titulo">Filippi Automotores</span>
-</div>
+  <p id="contadorAutos"></p>
 
-<div class="acciones">
+  <section id="autos" class="autos"></section>
 
-<input type="text" id="buscador" placeholder="🔎 Buscar auto..." onkeyup="filtrarAutos()" />
+  <a href="https://api.whatsapp.com/send?phone=543812082314&text=Hola!%20quiero%20consultar%20por%20un%20vehículo"
+    class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">💬</a>
 
-<a href="#" class="btn-filo">🤖 Filo IA</a>
-
-<a href="https://api.whatsapp.com/send?phone=543812082314&text=Hola!%20quiero%20consultar%20por%20un%20vehículo"
-class="btn-wsp" target="_blank">WhatsApp</a>
-
-</div>
-
-</header>
-
-<section id="autos" class="autos"></section>
-
-<a href="https://api.whatsapp.com/send?phone=543812082314&text=Hola!%20quiero%20consultar%20por%20un%20vehículo"
-class="whatsapp-float" target="_blank"> 💬
-</a>
-
-<script src="app.js"></script>
-
-<script>
-if ("serviceWorker" in navigator) {
-navigator.serviceWorker.register("service-worker.js");
-}
-</script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
 
 </body>
 </html>

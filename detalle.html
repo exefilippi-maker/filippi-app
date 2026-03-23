@@ -227,9 +227,8 @@
     document.getElementById("km").textContent = "🛣️ " + kmFormateado;
 
     const precioFormateado = precio
-      ? "$" + Number(precio).toLocaleString("es-AR")
-      : "Consultar precio";
-    document.getElementById("precio").textContent = precioFormateado;
+  ? "$" + Number(precio.replace(/[^0-9]/g, "")).toLocaleString("es-AR")
+  : "Consultar precio";
 
     // ─── BADGES ────────────────────────────────
     const badges = document.getElementById("badges");

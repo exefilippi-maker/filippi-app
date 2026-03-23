@@ -79,8 +79,8 @@ function mostrarAutos(autos) {
 
     // Formateo de números
     const precioFormateado = precio
-      ? "$" + Number(precio).toLocaleString("es-AR")
-      : "Consultar precio";
+  ? "$" + Number(precio.replace(/\./g, "")).toLocaleString("es-AR")
+  : "Consultar precio";
     const kmFormateado = km
       ? Number(km).toLocaleString("es-AR") + " km"
       : "";

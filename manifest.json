@@ -1,21 +1,27 @@
 {
   "name": "Filippi Automotores",
   "short_name": "Filippi",
-  "start_url": ".",
+  "description": "Buscá y consultá autos en Filippi Automotores",
+  "lang": "es",
+  "start_url": "/filippi-app/index.html",
+  "scope": "/filippi-app/",
   "display": "standalone",
-  "background_color": "#0f0f0f",
+  "background_color": "#0a1a2f",
   "theme_color": "#000000",
   "orientation": "portrait",
+  "categories": ["shopping", "automotive"],
   "icons": [
     {
-      "src": "icono.png",
+      "src": "icono-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "icono.png",
+      "src": "icono-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     }
   ]
 }

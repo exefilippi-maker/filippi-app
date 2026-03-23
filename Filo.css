@@ -1,0 +1,161 @@
+/* ─── VENTANA DEL CHAT ───────────────────────────────────── */
+#filo-chat {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  max-height: 480px;
+  background: #0a1a2f;
+  border-radius: 16px;
+  border: 1px solid #1a4a7a;
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+#filo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #000;
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+}
+
+#filo-cerrar {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+#filo-cerrar:hover {
+  color: white;
+}
+
+/* ─── MENSAJES ───────────────────────────────────────────── */
+#filo-mensajes {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #1a4a7a transparent;
+}
+
+#filo-mensajes::-webkit-scrollbar {
+  width: 4px;
+}
+
+#filo-mensajes::-webkit-scrollbar-thumb {
+  background: #1a4a7a;
+  border-radius: 4px;
+}
+
+/* ─── BURBUJAS ───────────────────────────────────────────── */
+.filo-burbuja {
+  max-width: 85%;
+  padding: 9px 13px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.filo-filo {
+  background: #0f2f55;
+  color: #e0eaf5;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.filo-usuario {
+  background: #00c2ff;
+  color: #001f3f;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  font-weight: 500;
+}
+
+/* ─── TYPING INDICATOR ───────────────────────────────────── */
+.filo-typing {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 12px 14px;
+}
+
+.filo-typing span {
+  width: 7px;
+  height: 7px;
+  background: #00c2ff;
+  border-radius: 50%;
+  animation: typing 1.2s infinite ease-in-out;
+}
+
+.filo-typing span:nth-child(2) { animation-delay: 0.2s; }
+.filo-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ─── INPUT ──────────────────────────────────────────────── */
+#filo-input-area {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid #1a4a7a;
+  background: #060f1e;
+}
+
+#filo-input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #1a4a7a;
+  background: #0a1a2f;
+  color: white;
+  font-size: 13px;
+  outline: none;
+}
+
+#filo-input:focus {
+  border-color: #00c2ff;
+}
+
+#filo-enviar {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #00c2ff;
+  color: #001f3f;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#filo-enviar:hover {
+  background: #00aadd;
+}
+
+/* ─── RESPONSIVE MOBILE ──────────────────────────────────── */
+@media (max-width: 600px) {
+  #filo-chat {
+    width: calc(100vw - 24px);
+    right: 12px;
+    bottom: 80px;
+    max-height: 420px;
+  }
+}
